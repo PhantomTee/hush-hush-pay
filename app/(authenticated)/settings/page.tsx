@@ -39,7 +39,10 @@ export default function SettingsPage() {
   }, [orgId, publicKey]);
 
   useEffect(() => {
-    fetchOrg();
+    const init = async () => {
+      await fetchOrg();
+    };
+    init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -19,12 +19,12 @@ export default function PayrollRunPage() {
     txHash?: string;
   }>({ status: 'pending', progressIndex: 0 });
 
-  const [orgId, setOrgId] = useState<string>("org_demo");
-
-  useEffect(() => {
-    const stored = localStorage.getItem('arxpay_org_id');
-    if (stored) setOrgId(stored);
-  }, []);
+  const [orgId, setOrgId] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('arxpay_org_id') || "org_demo";
+    }
+    return "org_demo";
+  });
 
   useEffect(() => {
     const fetchEmployees = async () => {

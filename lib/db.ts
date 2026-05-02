@@ -10,7 +10,7 @@ import {
   serverTimestamp, 
   onSnapshot 
 } from 'firebase/firestore';
-import { db, auth } from './firebase';
+import { db as firestoreDb, auth } from './firebase';
 
 export enum OperationType {
   CREATE = 'create',
@@ -104,12 +104,19 @@ export interface Payslip {
   date?: string;
 }
 
+export const db = {
+  organizations: [] as any[],
+  employees: [] as any[],
+  payRuns: [] as any[],
+  payslips: [] as any[]
+};
+
 // Database Operations
 export const dbOps = {
   // --- Organizations ---
   async createOrganization(org: Omit<Organization, 'id' | 'createdAt'>, id: string) {
     try {
-      await setDoc(doc(db, 'organizations', id), {
+      await setDoc(doc(firestoreDb, 'organizations', id), {
         ...org,
         createdAt: serverTimestamp()
       });
@@ -120,7 +127,7 @@ export const dbOps = {
 
   async getOrganization(id: string): Promise<Organization | null> {
     try {
-      const snap = await getDoc(doc(db, 'organizations', id));
+      const snap = await getDoc(doc(firestoreDb, 'organizations', id));
       if (snap.exists()) {
         return { id: snap.id, ...snap.data() } as Organization;
       }
@@ -133,9 +140,9 @@ export const dbOps = {
 
   // --- Employees ---
   async addEmployee(employee: Omit<Employee, 'id' | 'addedAt'>) {
-    const id = doc(collection(db, 'employees')).id;
+    const id = doc(collection(firestoreDb, 'employees')).id;
     try {
-      await setDoc(doc(db, 'employees', id), {
+      await setDoc(doc(firestoreDb, 'employees', id), {
         ...employee,
         addedAt: serverTimestamp()
       });
@@ -147,7 +154,7 @@ export const dbOps = {
 
   async getEmployeesByOrg(orgId: string): Promise<Employee[]> {
     try {
-      const q = query(collection(db, 'employees'), where('orgId', '==', orgId));
+      const q = query(collection(firestoreDb, 'employees'), where('orgId', '==', orgId));
       const snap = await getDocs(q);
       return snap.docs.map(d => ({ id: d.id, ...d.data() } as Employee));
     } catch (error) {
@@ -158,9 +165,9 @@ export const dbOps = {
 
   // --- Pay Runs ---
   async createPayRun(run: Omit<PayRun, 'id' | 'createdAt'>) {
-    const id = doc(collection(db, 'payRuns')).id;
+    const id = doc(collection(firestoreDb, 'payRuns')).id;
     try {
-      await setDoc(doc(db, 'payRuns', id), {
+      await setDoc(doc(firestoreDb, 'payRuns', id), {
         ...run,
         createdAt: serverTimestamp()
       });
@@ -172,7 +179,7 @@ export const dbOps = {
 
   async getPayRunsByOrg(orgId: string): Promise<PayRun[]> {
     try {
-      const q = query(collection(db, 'payRuns'), where('orgId', '==', orgId));
+      const q = query(collection(firestoreDb, 'payRuns'), where('orgId', '==', orgId));
       const snap = await getDocs(q);
       return snap.docs.map(d => ({ id: d.id, ...d.data() } as PayRun));
     } catch (error) {
@@ -184,7 +191,7 @@ export const dbOps = {
   // --- Payslips ---
   async getPayslipsByWallet(wallet: string): Promise<Payslip[]> {
     try {
-      const q = query(collection(db, 'payslips'), where('employeeWallet', '==', wallet));
+      const q = query(collection(firestoreDb, 'payslips'), where('employeeWallet', '==', wallet));
       const snap = await getDocs(q);
       return snap.docs.map(d => ({ id: d.id, ...d.data() } as Payslip));
     } catch (error) {

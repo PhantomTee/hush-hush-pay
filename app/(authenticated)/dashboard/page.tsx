@@ -38,7 +38,10 @@ export default function DashboardPage() {
   }, [publicKey]);
 
   useEffect(() => {
-    fetchDashboardData();
+    const init = async () => {
+      await fetchDashboardData();
+    };
+    init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

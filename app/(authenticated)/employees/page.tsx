@@ -23,12 +23,12 @@ export default function EmployeesPage() {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [orgId, setOrgId] = useState<string>("org_demo");
-
-  useEffect(() => {
-    const stored = localStorage.getItem('arxpay_org_id');
-    if (stored) setOrgId(stored);
-  }, []);
+  const [orgId, setOrgId] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('arxpay_org_id') || "org_demo";
+    }
+    return "org_demo";
+  });
 
   const fetchEmployees = useCallback(async () => {
     if (!orgId) return;
@@ -45,7 +45,10 @@ export default function EmployeesPage() {
   }, [orgId]);
 
   useEffect(() => {
-    fetchEmployees();
+    const init = async () => {
+      await fetchEmployees();
+    };
+    init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

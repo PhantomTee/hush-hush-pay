@@ -30,7 +30,10 @@ export default function EmployeePortalPage() {
   }, [connected, publicKey]);
 
   useEffect(() => {
-    fetchPayslips();
+    const init = async () => {
+      await fetchPayslips();
+    };
+    init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   

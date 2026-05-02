@@ -28,7 +28,10 @@ export default function PaymentHistoryPage() {
   }, [orgId]);
 
   useEffect(() => {
-    fetchHistory();
+    const init = async () => {
+      await fetchHistory();
+    };
+    init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

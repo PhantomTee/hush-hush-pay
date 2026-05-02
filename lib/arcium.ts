@@ -1,6 +1,6 @@
-import { ArciumClient } from '@arcium-hq/client';
+import { Arcium } from '@arcium-hq/client';
 
-export const arciumClient = new ArciumClient({
+export const arciumClient = new Arcium({
   network: process.env.NEXT_PUBLIC_ARCIUM_NETWORK || 'devnet',
   clusterUrl: process.env.NEXT_PUBLIC_SOLANA_RPC || 'https://api.devnet.solana.com',
 });
