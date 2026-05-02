@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "Organization": {
+      "title": "Organization",
+      "description": "A payroll workspace organization",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "mxeAddress": { "type": "string" },
+        "clusterId": { "type": "string" },
+        "adminWallet": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "adminWallet"]
+    },
+    "Employee": {
+      "title": "Employee",
+      "description": "An employee within an organization",
+      "type": "object",
+      "properties": {
+        "orgId": { "type": "string" },
+        "name": { "type": "string" },
+        "wallet": { "type": "string" },
+        "arcisPubkey": { "type": "string" },
+        "status": { "enum": ["active", "invited", "terminated"] },
+        "addedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orgId", "wallet", "status"]
+    },
+    "PayRun": {
+      "title": "Pay Run",
+      "description": "A payroll calculation run",
+      "type": "object",
+      "properties": {
+        "orgId": { "type": "string" },
+        "period": { "type": "string" },
+        "employeeCount": { "type": "integer" },
+        "aggregateUsdc": { "type": "number" },
+        "txHash": { "type": "string" },
+        "status": { "enum": ["pending", "complete", "failed"] },
+        "computationId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orgId", "period", "status"]
+    },
+    "Payslip": {
+      "title": "Payslip",
+      "description": "An individual encrypted payslip for an employee",
+      "type": "object",
+      "properties": {
+        "employeeId": { "type": "string" },
+        "orgId": { "type": "string" },
+        "period": { "type": "string" },
+        "date": { "type": "string" },
+        "encryptedCid": { "type": "string" }
+      },
+      "required": ["employeeId", "orgId", "period", "encryptedCid"]
+    }
+  },
+  "firestore": {
+    "/organizations/{orgId}": {
+      "schema": "Organization",
+      "description": "Root collection for organizations"
+    },
+    "/employees/{employeeId}": {
+      "schema": "Employee",
+      "description": "All employees across all orgs, secured by orgId"
+    },
+    "/payRuns/{runId}": {
+      "schema": "PayRun",
+      "description": "Historical records of payroll computations"
+    },
+    "/payslips/{payslipId}": {
+      "schema": "Payslip",
+      "description": "Encrypted payslips accessible by individual employees"
+    }
+  }
+}

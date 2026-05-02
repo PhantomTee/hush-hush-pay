@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-obsidian: #05000A;
+  --color-gold: #B026FF;
+  --color-amber: #B026FF;
+  --color-teal: #E082FF;
+  --color-gray-950: #080010;
+  --color-gray-900: #0D001A;
+  --color-gray-800: #140028;
+  --color-gray-700: #26004D;
+  --color-white: #F4E8FF;
+
+  --font-playfair: var(--font-playfair);
+  --font-dm-mono: var(--font-dm-mono);
+  --font-inter: var(--font-inter);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-obsidian);
+    color: var(--color-white);
+  }
+}
