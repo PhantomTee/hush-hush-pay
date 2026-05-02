@@ -11,31 +11,37 @@ export default function AuthenticatedLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-obsidian flex text-white overflow-hidden">
-      {/* Mobile sidebar overlay */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/60 z-40 md:hidden" 
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+    <div className="min-h-screen bg-obsidian flex text-white overflow-hidden relative">
+      {/* Mobile sidebar overlay with blur */}
+      <div 
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${
+          sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`} 
+        onClick={() => setSidebarOpen(false)}
+      />
       
-      <div className={`fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 md:relative md:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      {/* Sidebar Container */}
+      <div className={`fixed inset-y-0 left-0 z-50 transform transition-transform duration-500 ease-in-out md:relative md:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <Sidebar onClose={() => setSidebarOpen(false)} />
       </div>
 
-      <main className="flex-1 flex flex-col h-screen md:w-[calc(100%-16rem)] w-full overflow-hidden">
-        <header className="h-20 md:h-24 border-b border-white/10 flex items-center justify-between px-6 md:px-12 shrink-0 bg-obsidian">
+      <main className={`flex-1 flex flex-col h-screen transition-all duration-500 ${sidebarOpen ? 'md:ml-0 blur-sm md:blur-none opacity-50 md:opacity-100' : 'md:translate-x-0'}`}>
+        <header className="h-20 md:h-24 border-b border-white/10 flex items-center justify-between px-6 md:px-12 shrink-0 bg-obsidian/80 backdrop-blur-xl sticky top-0 z-30">
           <div className="flex items-center gap-4">
             <button 
-              onClick={() => setSidebarOpen(true)}
-              className="md:hidden text-white/60 hover:text-white"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="p-2 -ml-2 text-white/60 hover:text-white transition-colors hover:bg-white/5 rounded-sm"
+              aria-label={sidebarOpen ? "Close menu" : "Open menu"}
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M4 6h16M4 12h16M4 18h16" />
+                {sidebarOpen ? (
+                  <path d="M18 6L6 18M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
               </svg>
             </button>
-            <div>
+            <div className="flex flex-col">
               <h1 className="font-playfair text-xl md:text-2xl italic tracking-tight text-amber">HushHush Pay</h1>
               <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/40 hidden sm:block">Secure Executive Payroll</p>
             </div>

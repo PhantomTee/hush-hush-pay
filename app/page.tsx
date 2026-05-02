@@ -16,11 +16,12 @@ export default function LandingPage() {
           </div>
           <span className="font-playfair italic text-amber text-xl tracking-tight">HushHush Pay</span>
         </div>
-        <div className="flex items-center gap-4 md:gap-8 flex-wrap justify-center">
-          <Link href="/onboarding" className="text-[10px] uppercase tracking-widest text-white/40 hover:text-white transition-colors">Setup</Link>
-          <Link href="/employee" className="text-[10px] uppercase tracking-widest text-white/40 hover:text-white transition-colors">Employee Portal</Link>
-          <Link href="/dashboard" className="px-4 py-2 md:px-6 md:py-2 border border-white/20 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors">
-            Launch App
+        <div className="flex items-center gap-4 md:gap-12 flex-wrap justify-center">
+          <Link href="/dashboard" className="text-[10px] uppercase tracking-[0.2em] text-white hover:text-amber transition-colors font-medium">Dashboard</Link>
+          <Link href="/onboarding" className="text-[10px] uppercase tracking-[0.2em] text-white hover:text-amber transition-colors font-medium">Onboarding</Link>
+          <Link href="/employee" className="text-[10px] uppercase tracking-[0.2em] text-white hover:text-amber transition-colors font-medium">Employee Portal</Link>
+          <Link href="/dashboard" className="px-6 py-2 bg-amber text-black text-[10px] font-bold uppercase tracking-widest hover:bg-amber/90 transition-all ml-4">
+            Get Started
           </Link>
         </div>
       </nav>
@@ -57,10 +58,10 @@ export default function LandingPage() {
       <div className="py-24 bg-gray-950 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-4">
           {[
-            { title: "MPC-Encrypted Payments", icon: Cpu, desc: "Computations run on encrypted inputs across Arx nodes without revealing data." },
-            { title: "Zero On-Chain Exposure", icon: EyeOff, desc: "Amounts remain Enc<Shared, T>. Nothing is stored in plaintext on Solana." },
-            { title: "Employee-Only Decryption", icon: Lock, desc: "Only the intended recipient can decrypt their payslip with their private key." },
-            { title: "Arcium-Powered Security", icon: Shield, desc: "Backed by Solana's computational speed and Arcium's TEE-secured cluster network." }
+            { title: "MPC-Encrypted Payments", desc: "Computations run on encrypted inputs across Arx nodes without revealing data." },
+            { title: "Zero On-Chain Exposure", desc: "Amounts remain Enc<Shared, T>. Nothing is stored in plaintext on Solana." },
+            { title: "Employee-Only Decryption", desc: "Only the intended recipient can decrypt their payslip with their private key." },
+            { title: "Arcium-Powered Security", desc: "Backed by Solana's computational speed and Arcium's TEE-secured cluster network." }
           ].map((Feature, i) => (
             <motion.div 
               key={i} 
@@ -70,9 +71,7 @@ export default function LandingPage() {
               viewport={{ once: true }}
               className="p-8 bg-gray-800 border-l border-white/10 hover:border-amber transition-colors group"
             >
-              <div className="w-10 h-10 border border-amber/20 flex items-center justify-center mb-8 group-hover:border-amber transition-colors">
-                <Feature.icon className="text-amber" size={16} />
-              </div>
+              <div className="text-amber font-dm-mono text-xs mb-8 opacity-40 group-hover:opacity-100 transition-opacity">0{i + 1} — SEGMENT</div>
               <h3 className="text-lg font-playfair italic tracking-tight mb-4">{Feature.title}</h3>
               <p className="text-[11px] text-white/40 leading-loose">{Feature.desc}</p>
             </motion.div>

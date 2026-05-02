@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   description: 'A confidential payroll protocol using decentralized Multi-Party Computation (MPC) to secure salary data while automating on-chain disbursements.',
 };
 
+import { Preloader } from '@/components/Preloader';
+
 export default function RootLayout({
   children,
 }: {
@@ -33,6 +35,7 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${dm_mono.variable} ${inter.variable}`}>
       <body className="bg-obsidian text-white font-inter antialiased" suppressHydrationWarning>
         <WalletContextProvider>
+          <Preloader />
           {children}
         </WalletContextProvider>
       </body>
