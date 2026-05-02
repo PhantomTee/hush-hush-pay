@@ -76,9 +76,9 @@ export interface Employee {
   wallet: string;
   arcisPubkey: string;
   status: 'active' | 'invited' | 'terminated';
-  baseSalary: number; // Plaintext for employer preview
-  salaryCiphertext: string; // Base64 encoded Arcium ciphertext
-  salaryNonce: string; // Base64 encoded Arcium nonce
+  baseSalary?: number; // Plaintext for employer preview
+  salaryCiphertext?: string; // Base64 encoded Arcium ciphertext
+  salaryNonce?: string; // Base64 encoded Arcium nonce
   addedAt?: any;
 }
 
