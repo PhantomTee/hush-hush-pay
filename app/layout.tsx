@@ -20,8 +20,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Hush-Hush Pay',
-  description: 'Privacy-first payroll system built on Solana and Arcium',
+  title: 'HushHush Pay',
+  description: 'A confidential payroll protocol using decentralized Multi-Party Computation (MPC) to secure salary data while automating on-chain disbursements.',
 };
 
 export default function RootLayout({

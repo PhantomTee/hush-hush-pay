@@ -1,4 +1,4 @@
-# Hush-Hush Pay
+# HushHush Pay
 The next-generation, privacy-first payroll system built on Solana and Arcium's decentralized MPC network.
 
 ## Getting Started

@@ -73,7 +73,7 @@ export default function EmployeePortalPage() {
              </div>
              <div>
                <h1 className="text-2xl font-playfair italic tracking-tight text-white mb-1">Employee Portal</h1>
-               <p className="text-[10px] uppercase tracking-widest text-white/40">Hush-Hush Pay • Zero-Knowledge Salary</p>
+               <p className="text-[10px] uppercase tracking-widest text-white/40">HushHush Pay • Zero-Knowledge Salary</p>
              </div>
           </div>
           <div className="p-4 bg-gray-900 border border-white/5">

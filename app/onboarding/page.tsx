@@ -164,7 +164,7 @@ export default function OnboardingPage() {
               <div className="p-8 bg-gray-800 border border-white/5 text-center">
                 <p className="text-[11px] leading-loose text-white/60 mb-6">Share this encrypted invitation link with your employees. They will use it to connect their wallets and generate their decryption keys.</p>
                 <div className="p-4 bg-obsidian font-dm-mono text-xs text-amber break-all border border-amber/20">
-                  {typeof window !== 'undefined' ? window.location.origin : 'https://hush-hush.pay'}/invite/{createdOrgId || 'org_01'}#key=8x...9p
+                  {typeof window !== 'undefined' ? window.location.origin : 'https://hushhush.pay'}/invite/{createdOrgId || 'org_01'}#key=8x...9p
                 </div>
               </div>
               <button 
